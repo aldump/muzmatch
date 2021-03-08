@@ -1,0 +1,2 @@
+config/ssl/*
+!config/ssl/.gitkeep

@@ -1,0 +1,16 @@
+parameters:
+  hash: $argon2id$v=19$m=65536,t=4,p=1$uF7bBTcKDK0xs81y/WmHPQ$WxAxqaZLHp5aGHwMOBmWuL/YpWbQBZBKLx0dgxZhpuA
+
+App\Entity\User:
+  user_0:
+    username: admin
+    email: admin@b2b.com
+    password: <{hash}>
+    gender: 1
+    age: 0
+  user_{1..50}:
+    username: <username()>
+    email: <email()>
+    password: <{hash}>
+    gender: <numberBetween(0, 1)>
+    age: <numberBetween(18, 70)>

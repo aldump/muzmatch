@@ -1,0 +1,32 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - php
+      - db
+    volumes:
+      - ./app/public:/var/www/public
+      - ./docker/nginx/config:/etc/nginx
+    ports:
+      - "80:80"
+  php:
+    image: aldump/php:8.0
+    build: ./docker/php
+    volumes:
+      - ./app:/var/www
+    working_dir: /var/www
+    environment:
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+    volumes:
+      - ./docker/mysql/mysql-data:/var/lib/mysql
